@@ -16,9 +16,11 @@
           class="abror.springapp.RockMusic">
     </bean>
 
-
+<!--      Default, scope is Singleton -->
     <bean id="musicPlayer"
-          class="abror.springapp.MusicPlayer">
+          class="abror.springapp.MusicPlayer"
+          scope="prototype">
+
 
 
 
