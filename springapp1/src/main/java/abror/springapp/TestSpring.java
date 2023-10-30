@@ -1,13 +1,16 @@
 package abror.springapp;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import abror.springapp.config.SpringConfig;
+import abror.springapp.genres.ClassicalMusic;
+import abror.springapp.genres.RockMusic;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * @author Neil Alishev
  */
 public class TestSpring {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContext.xml"
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                SpringConfig.class
         );
 //        Music music = context.getBean("rockMusic", Music.class);
 //        MusicPlayer musicPlayer = new MusicPlayer(music);
@@ -19,8 +22,18 @@ public class TestSpring {
 //        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 //        musicPlayer.playMusic();
 
-        Computer computer = context.getBean("computer", Computer.class);
-        System.out.println(computer);
+        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+
+        System.out.println(musicPlayer.playMusic());
+
+        ClassicalMusic classicalMusic = context.getBean("classicalMusic", ClassicalMusic.class);
+        ClassicalMusic classicalMusic1 = context.getBean("classicalMusic", ClassicalMusic.class);
+        System.out.println(classicalMusic1==classicalMusic);
+
+
+        RockMusic rockMusic = context.getBean("rockMusic", RockMusic.class);
+//        musicPlayer.playMusic(MusicGenre.ROCK);
+//        musicPlayer.playMusic(MusicGenre.CLASSICAL);
         context.close();
     }
 }
